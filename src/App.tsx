@@ -1,24 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {FC, useState} from 'react';
 import './App.css';
+import { Card} from "@material-ui/core";
+import randomColor from "randomcolor";
 
-function App() {
+
+const App: FC = () => {
+  let data = Array.from(Array(40).keys())
+  let color = randomColor()
+  const [searchCol, setSearchCol] = useState(randomColor());
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="search">
+        <input
+            className="search-column"
+            placeholder="Find Color"
+            type="text"
+            onChange={(e) => {
+              setSearchCol(e.target.value);
+            }}
+        />
+      </div>
+      <div className="grid-container">
+        
+        {data
+          // .filter((data) => {
+          //   if (searchCol == "") {
+          //     return data;
+          //   } else if (
+          //     color
+          //       .toLowerCase()
+          //       .includes(searchCol.toLowerCase())
+          //   ) {
+          //     return data;
+          //   }
+          // })
+        .map((i) => {
+          let color1 = randomColor()
+          return (         
+            <Card
+              style={{ 
+              cursor: "pointer", 
+              backgroundColor: color1, 
+              width: "150px", 
+              height:"150px"}}
+            >
+            </Card>
+          );
+        })}
+      </div>
     </div>
   );
 }
